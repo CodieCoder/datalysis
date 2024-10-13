@@ -1,0 +1,29 @@
+.toaster{
+    border-radius:3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding : 0.5rem;
+
+    div{text-align: left;}
+}
+
+.error{ 
+    background-color: rgba(255, 0, 0, 0.2);
+    border : 1px solid rgba(250, 0, 0, 0.3);
+}
+
+.info{
+    background-color: rgba(0, 157, 255, 0.2);
+    border : 1px solid rgba(0, 157, 255, 0.3); 
+}
+
+.warning{ 
+    background-color: rgba(255, 238, 0, 0.2);
+    border : 1px solid rgba(255, 238, 0, 0.3); 
+}
+
+.success{
+    background-color: rgba(0, 255, 72, 0.2);
+    border : 1px solid rgba(0, 255, 72, 0.3); 
+}
