@@ -43,7 +43,6 @@ const SaveDataPage = ({
         <JsonTextField
           json={json}
           setjson={() => {}}
-          //   disabled
           readOnly
           rows={18}
           style={{

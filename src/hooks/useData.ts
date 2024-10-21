@@ -41,15 +41,8 @@ const useData = () => {
     };
 
     dispatch({ type: GlobalActions.addData, payload });
-
-    //get summary
-    // updateData(data).then((summary) =>
-    //   dispatch({ type: GlobalActions.updateData, payload: { id, summary } })
-    // );
   };
 
-  //TODO:
-  //fetch a summary of the data from ai model
   const updateData = async (id: string, data: IData) => {
     const chart = store?.data.find((each) => each.id === id);
     if (chart) {
@@ -92,6 +85,7 @@ const useData = () => {
       store?.data?.[0]
     );
   }, [store?.currentData]);
+  const allStore = useMemo(() => store || {}, [store?.data]);
 
   return {
     addData,
@@ -99,7 +93,7 @@ const useData = () => {
     removeData,
     updateCurrentData,
     updateData,
-    store,
+    store: allStore,
   };
 };
 

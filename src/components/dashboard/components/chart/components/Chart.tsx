@@ -1,5 +1,4 @@
 import ChartControls from "./Controls";
-import "../../../styles/chart.scss";
 import useTheme from "../../../../../hooks/useTheme";
 import { Box } from "@mantine/core";
 import { useFullscreen } from "@mantine/hooks";

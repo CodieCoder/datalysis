@@ -3,15 +3,22 @@ import { FC, memo, useMemo } from "react";
 const icons = {
   FileGood: "uil-file-check-alt",
   FileBad: "uil-file-block-alt",
+  AddFile: "uil-file-plus-alt",
+  SearchFile: "uil-file-search-alt",
   ChartCompare: "uil-comparison",
   Chart: "uil-chart",
   Brightness: "uil-brightness",
   Moon: "uil-moon",
-  AddFile: "uil-file-plus-alt",
   LeftArrow: "uil-arrow-left",
+  LeftSimpleArrow: "uil-angle-left-b",
+  RightSimpleArrow: "uil-angle-right-b",
+  DownArrow: "uil-angle-down",
   Fullscreen: "uil-expand-arrows",
-  Minimize: "uil-minus",
   ExitFullscreen: "uil-compress-arrows",
+  Minimize: "uil-minus",
+  Brain: "uil-brain",
+  User: "uil-user",
+  Plus: "uil-plus",
 };
 
 type TIconSize = "default" | "large" | "small" | string;

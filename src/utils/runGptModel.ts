@@ -1,8 +1,8 @@
-import { IGptPayload } from './types';
-import { runGroqGpt } from './runGroq';
+import { IGptPayload } from "./types";
+import { runGroqGpt } from "./runGroq";
 
 const runGPT = async (payload: IGptPayload) => {
-  if (!payload.prompts?.length || !payload?.data?.length) return;
+  if (!payload.prompts?.length || !payload?.data?.data?.length) return;
   else {
     return await runGroqGpt(payload);
   }

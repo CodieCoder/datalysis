@@ -491,6 +491,11 @@
   dependencies:
     call-bind "^1.0.7"
 
+"@mantine/carousel@^7.13.3":
+  version "7.13.3"
+  resolved "https://registry.yarnpkg.com/@mantine/carousel/-/carousel-7.13.3.tgz#6172a1e35165965836a4b9d4a788414eadf5abad"
+  integrity sha512-FMJIRQJ2/HpnzKfiOnK2DHBxz6PT7ckFEYtaQHeGkSUl5VIyONUk1+brm8uwaFNNPKn8qjUD1ad9/6ePGQMsiA==
+
 "@mantine/core@^7.13.1":
   version "7.13.1"
   resolved "https://registry.npmjs.org/@mantine/core/-/core-7.13.1.tgz"
@@ -522,6 +527,18 @@
   version "7.13.1"
   resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-7.13.1.tgz"
   integrity sha512-Hfd4v380pPJUKDbARk+egdAanx7bpGZmaOn8G3QBZjwDufVopxip0WPkifUKUIMeYY1CTboa+1go9l56ZWrrSg==
+
+"@mantine/spotlight@^7.13.3":
+  version "7.13.3"
+  resolved "https://registry.yarnpkg.com/@mantine/spotlight/-/spotlight-7.13.3.tgz#d9a32843d4d2838775ed1d475792b4cb47f647bb"
+  integrity sha512-NvsePW2sL3JO0CuaetlJRGiiQuRRRqI12bfi0unk/gNB2ZaI/mJ1btD2N5weoL6akhKy6lV7S0xxX8YJSVXT+w==
+  dependencies:
+    "@mantine/store" "7.13.3"
+
+"@mantine/store@7.13.3":
+  version "7.13.3"
+  resolved "https://registry.yarnpkg.com/@mantine/store/-/store-7.13.3.tgz#802a9ded1e0445cde7ea78bab76e61c83ee393e8"
+  integrity sha512-95nAgH6APhak1OwP2W3ogdWBiWkIDhDSbQEm2G9LTJLIJxzWSm1mLe5uDWluVEPZW2XFx137McuJb58i1A+QhQ==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -1326,6 +1343,18 @@ dotignore@~0.1.2:
   integrity sha512-UGGGWfSauusaVJC+8fgV+NVvBXkCTmVv7sk6nojDZZvuOUNGUy0Zk4UpHQD6EDjS0jpBwcACvH4eofvyzBcRDw==
   dependencies:
     minimatch "^3.0.4"
+
+embla-carousel-react@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/embla-carousel-react/-/embla-carousel-react-7.1.0.tgz#e716f4df7fd31f7ca3e59a3e011158167bc3c468"
+  integrity sha512-tbYRPRZSDNd2QLNqYDcArAakGIxtUbhS7tkP0dGXktXHGgcX+3ji3VrOUTOftBiujZrMV8kRxtrRUe/1soloIQ==
+  dependencies:
+    embla-carousel "7.1.0"
+
+embla-carousel@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/embla-carousel/-/embla-carousel-7.1.0.tgz#c770dd3ade9285a97f5e3b6bbf705bc35ec0f9b5"
+  integrity sha512-Bh8Pa8NWzgugLkf8sAGexQlBCNDFaej5BXiKgQdRJ1mUC9NWBrw9Z23YVPVGkguWoz5LMjZXXFVGCobl3UPt/Q==
 
 es-abstract@^1.22.1, es-abstract@^1.22.3, es-abstract@^1.23.0:
   version "1.23.3"

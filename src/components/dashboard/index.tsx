@@ -1,14 +1,16 @@
 import { AppShell, Box, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Logo from "../Logo";
-import DashboardDataDrawer from "./components/data";
+import DashboardDataDrawer from "./components/data/add";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 import Icon from "../Icon";
 import DashboardDesktop from "./components/Desktop";
 import Btn from "../common/Button";
 import useStore from "../../hooks/useStore";
-import { useEffect } from "react";
 import useTheme from "../../hooks/useTheme";
+import Footer from "./components/footer";
+import FloatingMenu from "./components/floatingMenu";
+import ViewData from "./components/data/view";
 
 export const Dashboard = () => {
   const [opened, { toggle }] = useDisclosure();
@@ -20,13 +22,14 @@ export const Dashboard = () => {
       <AppShell header={{ height: 40 }} footer={{ height: 40 }} padding="md">
         <AppShell.Header>
           <Group h="100%" px="md" justify={"space-between"} align="center">
-            <Btn
-              onClick={toggle}
+            {/* <Btn
+             
               leftSection={<Icon icon={"AddFile"} size="small" />}
               size={"xs"}
             >
               Add data
-            </Btn>
+            </Btn> */}
+            <ViewData addDataToggle={toggle} />
             <Logo />
             <Box style={{ display: "flex", alignItems: "center" }}>
               <ThemeSwitcher />
@@ -44,8 +47,12 @@ export const Dashboard = () => {
           </div>
         </AppShell.Main>
 
-        <AppShell.Footer p="md">Footer</AppShell.Footer>
+        <AppShell.Footer>
+          <Footer />
+        </AppShell.Footer>
       </AppShell>
+
+      <FloatingMenu isDrawerOpen={opened} toggleDrawer={toggle} />
       <DashboardDataDrawer isOpen={opened} onClose={toggle} />
     </Box>
   );

@@ -1,8 +1,9 @@
-import { Container } from "@mantine/core";
+import { Affix, Button, Container, Transition } from "@mantine/core";
 import DesktopPane from "./DesktopPane";
 import { useDisclosure } from "@mantine/hooks";
-import DashboardGpt from "./Gpt";
+import DashboardGpt from "./gpt";
 import ChartContainer from "./chart";
+import FloatingMenu from "./floatingMenu";
 
 const DashboardDesktop = () => {
   const [opened, { toggle }] = useDisclosure();

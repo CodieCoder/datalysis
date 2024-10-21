@@ -165,7 +165,7 @@ export function extractChartConfig2(text: string) {
 
 export function extractChartConfig(text: string) {
   const regex = /const chartConfig = ({.*?});/s;
-  const txt = text;
+  const txt = JSON.stringify(text);
   const match = txt.match(regex);
 
   if (match?.length) {
@@ -181,7 +181,7 @@ export function extractChartConfig(text: string) {
       return null;
     }
   } else {
-    console.warn("chartConfig object not found in the text.");
+    console.warn("chartConfig object not found in the text.", text);
     return null;
   }
 }

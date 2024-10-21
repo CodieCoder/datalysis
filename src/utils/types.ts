@@ -30,9 +30,14 @@ export interface IJsScriptPayload {
   ref?: any;
 }
 
+export interface IGptPromptPayload {
+  response?: string;
+  prompt: string;
+}
+
 export interface IGptPayload {
-  data: string;
-  prompts: IChat[];
+  data: Omit<IData, "id" | "charts">;
+  prompts: IGptPromptPayload[];
 }
 
 export interface IChartApiPayload {

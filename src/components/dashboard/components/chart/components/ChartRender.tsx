@@ -1,31 +1,45 @@
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import chartJs from "../../../../../utils/charts";
 import { IChartConfig } from "../../../../../utils/types";
 import ChartBox from "./Chart";
-import { isEmpty } from "lodash";
+import { isEmpty, sortBy } from "lodash";
 import { useElementSize } from "@mantine/hooks";
 import { Grid } from "@mantine/core";
+import useTheme from "../../../../../hooks/useTheme";
 
 interface IProps {
   type: string;
   config: IChartConfig;
 }
-const ChartRender = ({ type, config }: IProps) => {
+const ChartRender = memo(({ type, config }: IProps) => {
   const [span, setSpan] = useState(6);
   const { ref, width, height } = useElementSize();
+  const { isDark } = useTheme();
 
   const { Component, defaultConfig, chartData } = useMemo(() => {
     const result = chartJs.getChart(type);
 
-    const tmp = {
+    const tmp: any = {
       Component: result?.Component || null,
-      defaultConfig: { ...(result?.defaultConfig || {}), ...config },
+      defaultConfig: {
+        ...(result?.defaultConfig || {}),
+        ...config,
+        // sort: {
+        //   reverse: true,
+        // },
+        stacked: true,
+        yField: "price",
+        xField: "month",
+      },
     };
 
     try {
       const dataArray = JSON.parse(tmp?.defaultConfig?.data);
 
-      const test = dataArray?.map((data: any) => data);
+      let test: any[] = dataArray?.map((data: any) => data);
+
+      test = test.sort();
+      // test = sortBy(test);
 
       const config: any = {
         data: test,
@@ -59,6 +73,7 @@ const ChartRender = ({ type, config }: IProps) => {
             data={chartData}
             width={width}
             height={height}
+            theme={isDark ? "classicDark" : "academy"}
           />
         }
         title={type}
@@ -66,6 +81,6 @@ const ChartRender = ({ type, config }: IProps) => {
       />
     </Grid.Col>
   ) : null;
-};
+});
 
 export default ChartRender;

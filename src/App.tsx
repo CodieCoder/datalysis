@@ -1,6 +1,8 @@
 import { createTheme, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "@mantine/dropzone/styles.css";
+import "@mantine/spotlight/styles.css";
+import "@mantine/carousel/styles.css";
 import AppEntry from "./mainApp";
 import GlobalProvider from "./store/globalStore/Provider";
 

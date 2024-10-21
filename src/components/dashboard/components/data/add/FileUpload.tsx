@@ -6,9 +6,9 @@ import {
   MS_EXCEL_MIME_TYPE,
 } from "@mantine/dropzone";
 import { FC } from "react";
-import Icon from "../../../Icon";
-import useDevice from "../../../../hooks/useDevice";
-import Btn from "../../../common/Button";
+import Icon from "../../../../Icon";
+import useDevice from "../../../../../hooks/useDevice";
+import Btn from "../../../../common/Button";
 
 interface IProps extends DropzoneProps {}
 

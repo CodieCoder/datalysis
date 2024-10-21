@@ -39,5 +39,11 @@ export enum CHART_TYPES {
   column = "Column",
   pie = "pie",
   doughnut = "doughnut",
+  area = "area",
+  bubble = "bubble",
+  stock = "stock",
+  heatmap = "heatmap",
+  watefall = "watefall",
   scatter = "scatter",
+  histogram = "histogram",
 }

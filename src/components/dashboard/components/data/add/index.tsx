@@ -10,8 +10,8 @@ import {
 import { FC, useEffect, useMemo, useState } from "react";
 import FileUpload from "./FileUpload";
 import JsonTextField from "./JsonTextField";
-import Icon from "../../../Icon";
-import useData from "../../../../hooks/useData";
+import Icon from "../../../../Icon";
+import useData from "../../../../../hooks/useData";
 import { useSimpleToast } from "simple-tailwind-toast";
 import { parse } from "papaparse";
 import {
@@ -21,14 +21,14 @@ import {
   isValidJsonLength,
   minifyJsonData,
   stringifyFile,
-} from "../../../../utils/utils";
+} from "../../../../../utils/utils";
 import { useForm } from "@mantine/form";
-import { CHART_TYPES, FILE_TYPES } from "../../../../utils/constants";
-import useDevice from "../../../../hooks/useDevice";
+import { CHART_TYPES, FILE_TYPES } from "../../../../../utils/constants";
+import useDevice from "../../../../../hooks/useDevice";
 import SaveDataPage from "./SaveDataPage";
-import { IChart, IData } from "../../../../utils/types";
-import Btn from "../../../common/Button";
-import useGetChartTypes from "../../../../hooks/useGetChartTypes";
+import { IChart, IData } from "../../../../../utils/types";
+import Btn from "../../../../common/Button";
+import useGetChartTypes from "../../../../../hooks/useGetChartTypes";
 import csvtoJson from "convert-csv-to-json";
 
 interface IProps {
@@ -40,8 +40,8 @@ const DashboardDataDrawer: FC<IProps> = ({ isOpen, onClose }) => {
   const [json, setJson] = useState<string>();
   const [isError, setIsError] = useState(true);
   const [isFinalStep, setIsFinalStep] = useState(false);
-  const [dataLabel, setDataLabel] = useState<string>();
-  const [dataDescription, setDataDescription] = useState<string>();
+  const [dataLabel, setDataLabel] = useState<string>("");
+  const [dataDescription, setDataDescription] = useState<string>("");
 
   const getChartType = useGetChartTypes();
 
@@ -160,6 +160,7 @@ const DashboardDataDrawer: FC<IProps> = ({ isOpen, onClose }) => {
 
         return;
       }
+
       //save the data
       const payload: IData = {
         data: minifyJsonData(json),
@@ -201,10 +202,10 @@ const DashboardDataDrawer: FC<IProps> = ({ isOpen, onClose }) => {
 
   const isFinalStepError = useMemo(() => {
     if (isFinalStep) {
-      return !dataDescription?.length || !dataLabel?.length;
+      return !dataDescription?.length || !dataLabel.length;
     }
     return false;
-  }, [isFinalStep, dataDescription?.length, dataLabel?.length]);
+  }, [isFinalStep, dataDescription?.length, dataLabel.length]);
 
   return (
     <Drawer
@@ -249,7 +250,7 @@ const DashboardDataDrawer: FC<IProps> = ({ isOpen, onClose }) => {
                 placeholder="Enter JSON text here"
                 description={
                   <div>
-                    JSON data{" "}
+                    JSON data
                     <Text
                       size={"xs"}
                       variant={"text"}

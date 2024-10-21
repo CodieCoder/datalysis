@@ -1,7 +1,7 @@
 import { Flex, Group } from "@mantine/core";
 import Btn from "../../../../common/Button";
 import { CHART_TYPES, GLOBAL_CONSTANTS } from "../../../../../utils/constants";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { getChartTypeLabel } from "../../../../../utils/utils";
 
 interface IProps {
@@ -10,7 +10,7 @@ interface IProps {
   isLoading?: boolean;
 }
 
-const ChartTypes = ({ types, onClick, isLoading }: IProps) => {
+const ChartTypes = memo(({ types, onClick, isLoading }: IProps) => {
   const render = useMemo(() => {
     const result = {
       show: types.slice(0, GLOBAL_CONSTANTS.CHART_TYPES_MAX),
@@ -38,6 +38,6 @@ const ChartTypes = ({ types, onClick, isLoading }: IProps) => {
       ) : null}
     </Flex>
   );
-};
+});
 
 export default ChartTypes;
