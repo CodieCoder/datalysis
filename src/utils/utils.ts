@@ -1,12 +1,12 @@
+import { CHART_TYPES } from "../constants/chart";
+import { FILE_TYPES } from "../constants/common";
+
 /**
  * @description This function converts a file to string
  * @param file File
  * @param callback (text:string|null) =>void
  *
  */
-
-import { CHART_TYPES, FILE_TYPES, GLOBAL_CONSTANTS } from "./constants";
-
 export const stringifyFile = (
   file: File,
   callback: (text?: string | null) => void

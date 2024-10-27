@@ -1,8 +1,9 @@
 import { Flex, Group } from "@mantine/core";
 import Btn from "../../../../common/Button";
-import { CHART_TYPES, GLOBAL_CONSTANTS } from "../../../../../utils/constants";
+import { GLOBAL_CONSTANTS } from "../../../../../constants/common";
 import { memo, useMemo } from "react";
 import { getChartTypeLabel } from "../../../../../utils/utils";
+import { CHART_TYPES } from "../../../../../constants/chart";
 
 interface IProps {
   types: CHART_TYPES[];

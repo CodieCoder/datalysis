@@ -1,46 +1,89 @@
-.data-carousel-controls-dark{
-    background-color: rgba(255, 255, 255, 0.3);
-    height: 3rem;
-    border: 0;
-    cursor: pointer;
+.data-carousel-controls-dark {
+  background-color: rgba(255, 255, 255, 0.3);
+  height: 3rem;
+  border: 0;
+  cursor: pointer;
 
-    :hover{
-
+  :hover {
     background-color: rgba(255, 255, 255, 0.8);
-    }
+  }
 }
 
-.chartbox{
-    border-radius: 10px;
-    .chartbox-header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: rgba(100, 100, 155, 0.1);
-        width: 100%;
-        padding: 0.2rem 1rem;  
-
-        .chartbox-title{
-            font-weight: 600;
-        }
-    }
-}
-
-
-.ChartControls{
+.chartbox {
+  clear: both;
+  border-radius: 10px;
+  .chartbox-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
+    background-color: rgba(100, 100, 155, 0.1);
+    width: 100%;
+    padding: 0.2rem 1rem;
 
-    .chart-control-each{
-        // border : 1px solid #000;
-        padding : 0.1rem;
-        border-radius: 5px;
-        height: 1.2rem;
-        width: 1.2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .chartbox-title {
+      font-weight: 600;
     }
+  }
+}
+
+.ChartControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+
+  .chart-control-each {
+    // border : 1px solid #000;
+    padding: 0.1rem;
+    border-radius: 5px;
+    height: 1.2rem;
+    width: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.embla {
+  height: 100%;
+  overflow: hidden;
+
+  .embla__container {
+    display: flex;
+
+    .embla__slide {
+      flex: 0 0 100%;
+      min-width: 0;
+    }
+  }
+}
+
+.carousel {
+  position: relative;
+
+  .controls {
+    transition: 0.4s;
+    position: absolute;
+    width: 1rem;
+    border-radius: 5px;
+    padding: 0;
+    bottom: 50%;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+
+    :hover {
+      transition: 0.4s;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .control-left {
+    left: 0;
+    margin-left: -1.2rem;
+  }
+
+  .control-right {
+    right: 0;
+    margin-right: -1rem;
+  }
 }

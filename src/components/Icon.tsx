@@ -19,6 +19,7 @@ const icons = {
   Brain: "uil-brain",
   User: "uil-user",
   Plus: "uil-plus",
+  Close: " uil-times",
 };
 
 type TIconSize = "default" | "large" | "small" | string;

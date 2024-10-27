@@ -1,6 +1,5 @@
 import { Box, Stack } from "@mantine/core";
 import { IChart, IData } from "../../../../../utils/types";
-import OverlayLoading from "../../../../common/OverlayLoading";
 import ChartParent from "./Charts";
 import ChartRender from "./ChartRender";
 import ChartTypes from "./Types";
@@ -10,13 +9,13 @@ import { useSimpleToast } from "simple-tailwind-toast";
 import useStore from "../../../../../hooks/useStore";
 import useGetChart from "../../../../../hooks/useGetChart";
 import useData from "../../../../../hooks/useData";
-import { CHART_TYPES } from "../../../../../utils/constants";
 import { extractChartConfig } from "../../../../../utils/utils";
+import { CHART_TYPES } from "../../../../../constants/chart";
 
 interface IProps {
   data: IData;
-  height: number | string;
-  width: number;
+  height?: number | string;
+  width?: number;
 }
 
 const EachDataDashboard = memo(({ data, height, width }: IProps) => {
@@ -92,7 +91,7 @@ const EachDataDashboard = memo(({ data, height, width }: IProps) => {
   }, [data]);
 
   return (
-    <Box h={height} px={"xl"}>
+    <Box h={height}>
       {/* <OverlayLoading visible={getChart.isPending} opacity={0.2} /> */}
 
       <Stack h={height} align="stretch" justify="space-between">

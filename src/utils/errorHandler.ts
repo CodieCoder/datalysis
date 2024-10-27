@@ -1,4 +1,4 @@
-import { GENERAL_ERRORS } from './constants';
+import { GENERAL_ERRORS } from "../constants/common";
 
 export const generateError = (error?: string) => {
   if (!error) {

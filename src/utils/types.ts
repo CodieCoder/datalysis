@@ -1,5 +1,5 @@
 import { Chart, Options } from "@ant-design/plots/es/interface";
-import { CHART_TYPES } from "./constants";
+import { CHART_TYPES } from "../constants/chart";
 
 export interface IUseInferenceOptions {
   model?: string;

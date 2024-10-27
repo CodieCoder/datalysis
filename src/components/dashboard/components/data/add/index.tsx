@@ -1,19 +1,10 @@
-import {
-  Container,
-  Drawer,
-  Title,
-  Text,
-  Box,
-  Grid,
-  Stack,
-} from "@mantine/core";
-import { FC, useEffect, useMemo, useState } from "react";
+import { Drawer, Title, Text, Box, Stack } from "@mantine/core";
+import { FC, useMemo, useState } from "react";
 import FileUpload from "./FileUpload";
 import JsonTextField from "./JsonTextField";
 import Icon from "../../../../Icon";
 import useData from "../../../../../hooks/useData";
 import { useSimpleToast } from "simple-tailwind-toast";
-import { parse } from "papaparse";
 import {
   cleanJsonData,
   fileToString,
@@ -23,13 +14,14 @@ import {
   stringifyFile,
 } from "../../../../../utils/utils";
 import { useForm } from "@mantine/form";
-import { CHART_TYPES, FILE_TYPES } from "../../../../../utils/constants";
+import { FILE_TYPES } from "../../../../../constants/common";
 import useDevice from "../../../../../hooks/useDevice";
 import SaveDataPage from "./SaveDataPage";
 import { IChart, IData } from "../../../../../utils/types";
 import Btn from "../../../../common/Button";
 import useGetChartTypes from "../../../../../hooks/useGetChartTypes";
 import csvtoJson from "convert-csv-to-json";
+import { CHART_TYPES } from "../../../../../constants/chart";
 
 interface IProps {
   isOpen: boolean;
@@ -218,6 +210,11 @@ const DashboardDataDrawer: FC<IProps> = ({ isOpen, onClose }) => {
           </Title>
         </Box>
       }
+      transitionProps={{
+        transition: "rotate-left",
+        duration: 250,
+        timingFunction: "linear",
+      }}
     >
       <Box h={"91vh"}>
         <Stack h={"100%"} align="stretch" justify="space-between" gap="md">

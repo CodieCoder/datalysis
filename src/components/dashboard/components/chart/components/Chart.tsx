@@ -1,7 +1,9 @@
 import ChartControls from "./Controls";
 import useTheme from "../../../../../hooks/useTheme";
-import { Box } from "@mantine/core";
-import { useFullscreen } from "@mantine/hooks";
+import { Box, Drawer } from "@mantine/core";
+import { useDisclosure, useFullscreen } from "@mantine/hooks";
+import ChartToolsMenu from "./tools";
+import ChartToolMenuDrawer from "./tools/Drawer";
 
 interface IProps {
   chart: React.ReactNode;
@@ -25,6 +27,7 @@ const ChartBox = ({
   updateSpan,
   span,
 }: IProps) => {
+  const [opened, { toggle: toggleMenu }] = useDisclosure();
   const fullscreenHook = useFullscreen();
   const { isDark } = useTheme();
 
@@ -32,7 +35,9 @@ const ChartBox = ({
     <Box
       className="chartbox"
       style={{
+        position: "relative",
         border: `1px solid ${isDark ? "#555" : "#ddd"}`,
+        overflow: "hidden",
       }}
       p={0}
       ref={fullscreenHook?.ref}
@@ -44,7 +49,12 @@ const ChartBox = ({
           borderBottom: `1px solid ${isDark ? "#555" : "#ddd"}`,
         }}
       >
-        <div className="chartbox-title">{title}</div>
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <div className="chartbox-menu">
+            <ChartToolsMenu toggle={toggleMenu} isOpen={opened} />
+          </div>
+          <div className="chartbox-title">{title}</div>
+        </div>
         <div className="chartbox-others">{headerComponent}</div>
         <div className="chartbox-others">
           <ChartControls
@@ -55,9 +65,12 @@ const ChartBox = ({
           />
         </div>
       </div>
-      <div className="chartbox-chart" ref={chartRef}>
-        {chart}
-      </div>
+      <Box pos={"relative"} h={"100%"}>
+        <ChartToolMenuDrawer toggle={toggleMenu} isOpen={opened} />
+        <div className="chartbox-chart" ref={chartRef}>
+          {chart}
+        </div>
+      </Box>
     </Box>
   );
 };

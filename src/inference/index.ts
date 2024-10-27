@@ -1,8 +1,8 @@
-import { HfInference } from '@huggingface/inference';
-import ENV from '../config/env';
-import { IOptions } from '../utils/types';
-import { generateError } from '../utils/errorHandler';
-import { GENERAL_ERRORS } from '../utils/constants';
+import { HfInference } from "@huggingface/inference";
+import ENV from "../config/env";
+import { IOptions } from "../utils/types";
+import { generateError } from "../utils/errorHandler";
+import { GENERAL_ERRORS } from "../constants/common";
 
 // const tmp:PipelineType  = "PIPELINE_DATA"
 
@@ -21,7 +21,7 @@ class InferenceClass {
     }
 
     if (options.model) {
-      const model = 'HuggingFaceH4/zephyr-7b-beta';
+      const model = "HuggingFaceH4/zephyr-7b-beta";
       //   const model = 'meta-llama/CodeLlama-7b-hf';
       try {
         // const output = await this.instance.textGeneration({

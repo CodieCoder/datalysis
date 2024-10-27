@@ -1,13 +1,8 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { GlobalActions } from "../store/globalStore/Provider";
-import {
-  cleanJsonData,
-  generateId,
-  getDataSummary,
-  truncateText,
-} from "../utils/utils";
+import { cleanJsonData, generateId } from "../utils/utils";
 import useStore from "./useStore";
-import { CHART_TYPES, GLOBAL_CONSTANTS } from "../utils/constants";
+import { GLOBAL_CONSTANTS } from "../constants/common";
 import { useSimpleToast } from "simple-tailwind-toast";
 import { IData } from "../utils/types";
 

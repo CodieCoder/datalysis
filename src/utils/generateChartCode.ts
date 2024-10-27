@@ -1,5 +1,5 @@
 import { marked } from "marked";
-import { GLOBAL_CONSTANTS } from "./constants";
+import { GLOBAL_CONSTANTS } from "../constants/common";
 
 const generateChartCode = (text: string) => {
   if (text && text.length > 30) {
