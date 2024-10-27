@@ -1,5 +1,4 @@
-import { Box, Divider, Flex } from "@mantine/core";
-import Icon from "../../../../../Icon";
+import { Box, Container, Divider, Flex } from "@mantine/core";
 
 interface IProps {
   isOpen?: boolean;
@@ -18,24 +17,18 @@ const ChartToolMenuDrawer = ({ isOpen, toggle }: IProps) => {
         color: "#ddd",
         height: "100%",
         zIndex: 1,
-        //   background: "rgba(120, 120, 120, 0.1)",
+        backdropFilter: "blur(5px)",
+        background: "rgba(10, 10, 10, 0.6)",
+        width: "20rem",
+        marginLeft: isOpen ? "0" : "-22rem",
+        transition: "0.4s",
       }}
     >
-      <div
-        style={{
-          background: "rgba(10, 10, 10, 0.6)",
-          transition: "0.4s",
-          width: "20rem",
-          marginLeft: isOpen ? "0" : "-22rem",
-          height: "100%",
-          backdropFilter: "blur(5px)",
-        }}
-        //   px="0.5rem"
-      >
+      <Container>
         <Flex justify={"space-between"}>Chart tools menu</Flex>
         <Divider color={"gray"} />
         <Box>//body</Box>
-      </div>
+      </Container>
     </Box>
   );
 };
