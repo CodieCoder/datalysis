@@ -11,6 +11,7 @@ import useGetChart from "../../../../../hooks/useGetChart";
 import useData from "../../../../../hooks/useData";
 import { extractChartConfig } from "../../../../../utils/utils";
 import { CHART_TYPES } from "../../../../../constants/chart";
+import ChartStoreProvider from "../store";
 
 interface IProps {
   data: IData;
@@ -100,10 +101,12 @@ const EachDataDashboard = memo(({ data, height, width }: IProps) => {
             charts={charts!.map((chart) => ({
               key: chart.type,
               component: (
-                <ChartRender
-                  type={chart.type}
-                  config={{ ...globalChartConfig, ...chart.config }}
-                />
+                <ChartStoreProvider id={chart.type}>
+                  <ChartRender
+                    type={chart.type}
+                    config={{ ...globalChartConfig, ...chart.config }}
+                  />
+                </ChartStoreProvider>
               ),
             }))}
           />

@@ -42,10 +42,6 @@ const ViewData = ({ addDataToggle }: IProps) => {
     return dataList;
   }, [store?.data]);
 
-  useEffect(() => {
-    console.log("Testee store : ", allData);
-  }, [allData, currentData]);
-
   return (
     <>
       {currentData ? (

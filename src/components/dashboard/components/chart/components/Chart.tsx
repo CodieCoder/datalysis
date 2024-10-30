@@ -2,7 +2,7 @@ import ChartControls from "./Controls";
 import useTheme from "../../../../../hooks/useTheme";
 import { Box, Drawer } from "@mantine/core";
 import { useDisclosure, useFullscreen } from "@mantine/hooks";
-import ChartToolsMenu from "./tools";
+import ChartToolsMenu from "./tools/BurgerButton";
 import ChartToolMenuDrawer from "./tools/Drawer";
 
 interface IProps {

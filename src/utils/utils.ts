@@ -139,7 +139,7 @@ export function extractChartConfig2(text: string) {
     return null;
   }
 
-  console.log("Testee code to process : ", text);
+  console.log("OK:  Code to process : ", text);
 
   try {
     const txt = JSON.stringify(text);

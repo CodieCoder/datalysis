@@ -15,7 +15,7 @@ const generateChartCode = (text: string) => {
     }
     return text;
   } else {
-    console.log("Testee NO CODE: ");
+    console.log("Error :  NO CODE: ");
     return;
   }
 };

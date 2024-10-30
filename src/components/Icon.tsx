@@ -19,7 +19,8 @@ const icons = {
   Brain: "uil-brain",
   User: "uil-user",
   Plus: "uil-plus",
-  Close: " uil-times",
+  Close: "uil-times",
+  InfoCircle: "uil-info-circle",
 };
 
 type TIconSize = "default" | "large" | "small" | string;

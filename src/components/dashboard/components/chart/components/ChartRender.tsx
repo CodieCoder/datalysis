@@ -6,6 +6,7 @@ import { isEmpty, sortBy } from "lodash";
 import { useElementSize } from "@mantine/hooks";
 import { Grid } from "@mantine/core";
 import useTheme from "../../../../../hooks/useTheme";
+import { useChartStore } from "../store";
 
 interface IProps {
   type: string;
@@ -15,6 +16,7 @@ const ChartRender = memo(({ type, config }: IProps) => {
   const [span, setSpan] = useState(6);
   const { ref, width, height } = useElementSize();
   const { isDark } = useTheme();
+  const { store: chartStore } = useChartStore();
 
   const { Component, defaultConfig, chartData } = useMemo(() => {
     const result = chartJs.getChart(type);
@@ -22,14 +24,9 @@ const ChartRender = memo(({ type, config }: IProps) => {
     const tmp: any = {
       Component: result?.Component || null,
       defaultConfig: {
-        ...(result?.defaultConfig || {}),
         ...config,
-        // sort: {
-        //   reverse: true,
-        // },
-        stacked: true,
-        yField: "price",
-        xField: "month",
+        ...(result?.defaultConfig || {}),
+        ...(chartStore?.options || {}),
       },
     };
 
@@ -45,7 +42,6 @@ const ChartRender = memo(({ type, config }: IProps) => {
         data: test,
         ...(tmp?.defaultConfig || {}),
       };
-      console.log("Testee vvv v dataArray config: ", test);
 
       return { ...tmp, defaultConfig: config, chartData: test };
     } catch (error) {
@@ -53,14 +49,11 @@ const ChartRender = memo(({ type, config }: IProps) => {
     }
 
     return { ...tmp, chartData: [] };
-  }, [type, config]);
+  }, [type, config, chartStore?.options]);
 
   useEffect(() => {
-    console.log("Testee this chart defaultConfig; ", {
-      ...defaultConfig,
-      data: chartData,
-    });
-  }, [defaultConfig]);
+    console.log("Testee chartStore?.options :  ", chartStore?.options);
+  }, [chartStore?.options]);
 
   return Component && !isEmpty(defaultConfig) ? (
     <Grid.Col key={type} span={span}>
