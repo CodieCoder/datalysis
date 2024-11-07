@@ -52,9 +52,11 @@ export interface IChart {
   chatContext?: IChat[];
 }
 
+export type IRecordArray = Record<string, any>;
+
 export interface IData {
   id?: string;
-  data: string;
+  data: IRecordArray[];
   label: string;
   description?: string;
   charts?: IChart[];

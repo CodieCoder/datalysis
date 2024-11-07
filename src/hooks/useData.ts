@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { GlobalActions } from "../store/globalStore/Provider";
-import { cleanJsonData, generateId } from "../utils/utils";
+import { generateId } from "../utils/utils";
 import useStore from "./useStore";
 import { GLOBAL_CONSTANTS } from "../constants/common";
 import { useSimpleToast } from "simple-tailwind-toast";
-import { IData } from "../utils/types";
+import { IData, IRecordArray } from "../utils/types";
 
 const useData = () => {
   const { dispatch, store } = useStore();
@@ -18,8 +18,7 @@ const useData = () => {
 
   const addData = (data: IData) => {
     const id = generateId();
-    const content = cleanJsonData(data.data);
-    if (content.length > GLOBAL_CONSTANTS.MAX_DATA_LENGTH) {
+    if (data.data.length > GLOBAL_CONSTANTS.MAX_DATA_LENGTH) {
       toast.add({
         content: {
           title: `Data too long. Maximum character length is ${GLOBAL_CONSTANTS.MAX_DATA_LENGTH}.`,
@@ -29,10 +28,11 @@ const useData = () => {
 
       return;
     }
+
     const payload: IData = {
       id,
       ...data,
-      data: content,
+      data: data.data,
     };
 
     dispatch({ type: GlobalActions.addData, payload });

@@ -11,6 +11,7 @@ import { useChartStore } from "../../../store";
 import useStore from "../../../../../../../hooks/useStore";
 import Icon from "../../../../../../Icon";
 import CHART_STORE_ACTIONS_ENUM from "../../../store/actions";
+import chartJs from "../../../../../../../utils/charts";
 
 const ChartToolFields = () => {
   const { id, store, dispatch: _dispatch } = useChartStore();
@@ -25,9 +26,10 @@ const ChartToolFields = () => {
     );
 
     if (tmp) {
-      const datatArray = JSON.parse(tmp.data) as Array<Object>;
+      //   const datatArray = JSON.parse(tmp.data) as Array<Object>;
+      //   const dataArray = chartJs.dataToArray();
 
-      const dataProps = datatArray.reduce((prev: string[], current) => {
+      const dataProps = tmp.data.reduce((prev: string[], current) => {
         const props = Object.keys(current);
         return Array.from(new Set([...prev, ...props]));
       }, [] as string[]);

@@ -17,7 +17,7 @@ import { useForm } from "@mantine/form";
 import { FILE_TYPES } from "../../../../../constants/common";
 import useDevice from "../../../../../hooks/useDevice";
 import SaveDataPage from "./SaveDataPage";
-import { IChart, IData } from "../../../../../utils/types";
+import { IChart, IData, IRecordArray } from "../../../../../utils/types";
 import Btn from "../../../../common/Button";
 import useGetChartTypes from "../../../../../hooks/useGetChartTypes";
 import csvtoJson from "convert-csv-to-json";
@@ -29,7 +29,7 @@ interface IProps {
 }
 
 const DashboardDataDrawer: FC<IProps> = ({ isOpen, onClose }) => {
-  const [json, setJson] = useState<string>();
+  const [json, setJson] = useState<IRecordArray[]>();
   const [isError, setIsError] = useState(true);
   const [isFinalStep, setIsFinalStep] = useState(false);
   const [dataLabel, setDataLabel] = useState<string>("");
@@ -66,7 +66,12 @@ const DashboardDataDrawer: FC<IProps> = ({ isOpen, onClose }) => {
 
   const updateJson = (text: string) => {
     const cleanedJson = cleanJsonData(text);
-    setJson(cleanedJson);
+    if (cleanedJson.isSuccess && cleanedJson.data) {
+      setJson(cleanedJson.data);
+    } else {
+      toast.add({ content: { title: cleanedJson.msg } });
+      return;
+    }
   };
 
   const handleFileUpload = (file?: FileList | null) => {
@@ -232,13 +237,13 @@ const DashboardDataDrawer: FC<IProps> = ({ isOpen, onClose }) => {
                 setLabel={setDataLabel}
                 description={dataDescription}
                 setDescription={setDataDescription}
-                json={json}
+                json={JSON.stringify(json)}
               />
             ) : (
               <JsonTextField
-                json={json}
+                json={JSON.stringify(json)}
                 setjson={(data) => {
-                  setJson(data);
+                  updateJson(data);
                 }}
                 rows={isMobile ? 22 : 22}
                 style={{

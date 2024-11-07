@@ -10,9 +10,15 @@ const getChart = (type: string) => {
   return chart;
 };
 
+const dataToArray = (data: string) => {
+  const dataArray = JSON.parse(data) as Array<Object>;
+  return dataArray;
+};
+
 const chartJs = {
   allCharts: All_CHARTS,
   getChart,
+  dataToArray,
 };
 
 export default chartJs;

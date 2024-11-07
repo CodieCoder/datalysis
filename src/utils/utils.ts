@@ -1,5 +1,6 @@
 import { CHART_TYPES } from "../constants/chart";
 import { FILE_TYPES } from "../constants/common";
+import { IRecordArray } from "./types";
 
 /**
  * @description This function converts a file to string
@@ -64,12 +65,37 @@ export const generateId = () => {
   return crypto.randomUUID().toString();
 };
 
-export const cleanJsonData = (data: string) => {
-  const parsedData = JSON.parse(data) as Array<Object>;
-  const result = JSON.stringify(parsedData);
+/**
+ * @description: Applies all the necessary sanitization
+ *  and structuring of the user data uploaded/paseted.
+ * @param data string
+ *
+ * @returns An array of objects (IRecord)
+ */
 
-  //remove unnecessary characters from Json data
-  return result.replace(/\n/g, "");
+interface IOutput {
+  isSuccess: boolean;
+  msg?: string;
+  data?: null;
+}
+export const cleanJsonData = (data: string) => {
+  const output: IOutput = { isSuccess: false };
+
+  try {
+    const parsedData = JSON.parse(data) as IRecordArray;
+    const stringData = JSON.stringify(parsedData);
+
+    //remove unnecessary characters from Json data
+    const cleanData = stringData.replace(/\n/g, "");
+
+    //turn back again to an array
+    const arrayData = JSON.parse(cleanData);
+    output.data = arrayData;
+  } catch (error) {
+    output.msg = "Invalid data. Please check your data and try again.";
+  }
+
+  return output;
 };
 
 export const getDataSummary = (data: string) => {
@@ -98,8 +124,13 @@ export const getFileType = (file: File) => {
  * @param data string - data to check if it is valid
  * @return boolean -  true if the data is a valid JSON data else false
  */
-export const isValidJsonLength = (data?: string) => {
-  if (data?.length && data?.length > 9 && data?.length <= 15000) {
+export const isValidJsonLength = (data?: IRecordArray[]) => {
+  const stringData = JSON.stringify(data);
+  if (
+    stringData?.length &&
+    stringData?.length > 9 &&
+    stringData?.length <= 15000
+  ) {
     //run JSON validity check
     return true;
   } else {
@@ -116,15 +147,15 @@ export const getChartTypeLabel = (type: CHART_TYPES) => {
   }
 };
 
-export const minifyJsonData = (data: string) => {
+export const minifyJsonData = (data: IRecordArray[]) => {
   if (data?.length) {
     try {
-      const parsedData = JSON.parse(data) as Array<Object>;
+      // const parsedData = JSON.parse(data) as Array<Object>;
 
       // Leave only 2 elements
-      const minifiedData = parsedData.slice(0, 2);
+      const minifiedData = data.slice(0, 2);
 
-      return JSON.stringify(minifiedData);
+      return minifiedData;
     } catch (error) {
       console.error("Error parsing JSON data:", error);
       return data;
