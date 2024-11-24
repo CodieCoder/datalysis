@@ -85,7 +85,9 @@ export interface IGlobalContext {
 }
 
 export interface IChartTypePayload
-  extends Pick<IData, "data" | "description" | "label"> {}
+  extends Pick<IData, "description" | "label"> {
+  data: string;
+}
 
 export type IChartTypesResponse = CHART_TYPES[];
 
@@ -94,8 +96,8 @@ export interface IChartProp {
   component: React.ReactNode;
 }
 
-export interface IChartPayload
-  extends Pick<IData, "data" | "description" | "label"> {
+export interface IChartPayload extends Pick<IData, "description" | "label"> {
+  data: string;
   type: CHART_TYPES;
 }
 

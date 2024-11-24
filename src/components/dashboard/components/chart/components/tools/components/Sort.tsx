@@ -50,7 +50,6 @@ function numberFn<T = Record<string, string | number>>(
   field: string,
   order: "asc" | "desc"
 ) {
-  console.log("Testee numberFn : ", field);
   if (!data?.length || !field?.length) {
     return data;
   } else {
@@ -94,11 +93,11 @@ const ChartToolsSort = () => {
             "asc"
           );
           console.log("Testee sortedData : ", sortedData);
-          //   dispatch({
-          //     type: CHART_STORE_ACTIONS_ENUM.UPDATE_OPTIONS,
-          //     payload: { data: sortedData },
-          //   });
-          //   return sortedData;
+          dispatch({
+            type: CHART_STORE_ACTIONS_ENUM.UPDATE_OPTIONS,
+            payload: { data: sortedData },
+          });
+          return sortedData;
         }
       }
 

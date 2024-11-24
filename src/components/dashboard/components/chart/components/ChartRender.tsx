@@ -1,6 +1,6 @@
 import { memo, useEffect, useMemo, useState } from "react";
 import chartJs from "../../../../../utils/charts";
-import { IChartConfig } from "../../../../../utils/types";
+import { IChartConfig, IRecordArray } from "../../../../../utils/types";
 import ChartBox from "./Chart";
 import { isEmpty, sortBy } from "lodash";
 import { useElementSize } from "@mantine/hooks";
@@ -11,8 +11,12 @@ import { useChartStore } from "../store";
 interface IProps {
   type: string;
   config: IChartConfig;
+  chartData: IRecordArray[];
+  label: string;
+  description: string | undefined;
+  id: string | undefined;
 }
-const ChartRender = memo(({ type, config }: IProps) => {
+const ChartRender = memo(({ type, config, chartData: data }: IProps) => {
   const [span, setSpan] = useState(6);
   const { ref, width, height } = useElementSize();
   const { isDark } = useTheme();
@@ -20,7 +24,7 @@ const ChartRender = memo(({ type, config }: IProps) => {
 
   const { Component, defaultConfig, chartData } = useMemo(() => {
     const result = chartJs.getChart(type);
-
+    console.log("Testee chartData : ", config);
     const tmp: any = {
       Component: result?.Component || null,
       defaultConfig: {
@@ -30,30 +34,21 @@ const ChartRender = memo(({ type, config }: IProps) => {
       },
     };
 
-    try {
-      const dataArray = JSON.parse(tmp?.defaultConfig?.data);
+    const _config: any = {
+      ...(config || {}),
+      ...(tmp?.defaultConfig || {}),
+      ...(chartStore?.options || {}),
+      data,
+    };
 
-      let test: any[] = dataArray?.map((data: any) => data);
-
-      test = test.sort();
-      // test = sortBy(test);
-
-      const config: any = {
-        data: test,
-        ...(tmp?.defaultConfig || {}),
-      };
-
-      return { ...tmp, defaultConfig: config, chartData: test };
-    } catch (error) {
-      console.error("Error parsing string to JSON : ", error);
-    }
+    return { ...tmp, defaultConfig: _config };
 
     return { ...tmp, chartData: [] };
   }, [type, config, chartStore?.options]);
 
   useEffect(() => {
-    console.log("Testee chartStore?.options :  ", chartStore?.options);
-  }, [chartStore?.options]);
+    console.log("Testee defaultConfig :  ", defaultConfig);
+  }, [defaultConfig]);
 
   return Component && !isEmpty(defaultConfig) ? (
     <Grid.Col key={type} span={span}>
@@ -63,7 +58,7 @@ const ChartRender = memo(({ type, config }: IProps) => {
         chart={
           <Component
             {...defaultConfig}
-            data={chartData}
+            data={data}
             width={width}
             height={height}
             theme={isDark ? "classicDark" : "academy"}

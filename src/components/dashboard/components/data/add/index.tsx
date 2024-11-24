@@ -165,33 +165,36 @@ const DashboardDataDrawer: FC<IProps> = ({ isOpen, onClose }) => {
         description: dataDescription,
       };
 
-      getChartType.mutate(payload, {
-        onSuccess: (response) => {
-          if (response.data?.length) {
-            const charts = response.data?.map((type: CHART_TYPES) => {
-              const tmp: IChart = {
-                type,
-              };
+      getChartType.mutate(
+        { ...payload, data: JSON.stringify(payload.data) },
+        {
+          onSuccess: (response) => {
+            if (response.data?.length) {
+              const charts = response.data?.map((type: CHART_TYPES) => {
+                const tmp: IChart = {
+                  type,
+                };
 
-              return tmp;
-            });
+                return tmp;
+              });
 
-            addData({
-              ...payload,
-              data: json,
-              charts,
-            });
+              addData({
+                ...payload,
+                data: json,
+                charts,
+              });
 
-            onClose();
-            setJson(undefined);
-            setIsError(true);
-            setIsFinalStep(false);
-          } else {
-            onError();
-          }
-        },
-        onError,
-      });
+              onClose();
+              setJson(undefined);
+              setIsError(true);
+              setIsFinalStep(false);
+            } else {
+              onError();
+            }
+          },
+          onError,
+        }
+      );
     } else {
       setIsFinalStep(true);
     }

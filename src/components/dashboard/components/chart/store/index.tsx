@@ -50,9 +50,9 @@ export const useChartStore = () => {
   //   const id = useMemo(() => _id, [_store]);
   //   const dispatch = useCallback(_dispatch, [store]);
 
-  useEffect(() => {
-    console.log("Testee store : ", store);
-  }, [store]);
+  // useEffect(() => {
+  //   console.log("Testee store : ", store);
+  // }, [store]);
 
   return { id, store, dispatch };
 };

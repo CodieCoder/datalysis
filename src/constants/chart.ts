@@ -29,7 +29,7 @@ export const DEFAULT_CHART_CONFIG: IChartConfig = {
   color: "#f00",
   sort: true,
   autoFit: true,
-  colorField: "month",
+  // colorField: "month",
   radius: 1,
 };
 

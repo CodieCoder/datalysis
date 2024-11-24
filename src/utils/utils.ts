@@ -29,7 +29,7 @@ export const stringifyFile = (
   }
 };
 
-export const fileToString = (
+export const fileToString = async (
   file: File
 ): Promise<string | undefined | null> => {
   return new Promise((resolve, reject) => {
@@ -91,6 +91,7 @@ export const cleanJsonData = (data: string) => {
     //turn back again to an array
     const arrayData = JSON.parse(cleanData);
     output.data = arrayData;
+    output.isSuccess = true;
   } catch (error) {
     output.msg = "Invalid data. Please check your data and try again.";
   }
@@ -109,8 +110,7 @@ export const getDataSummary = (data: string) => {
 export const getFileType = (file: File) => {
   const type = file.type.split("/");
   if (type?.length) {
-    const _type = type?.[1] || type[0];
-    if (_type === "json" || _type === "ld+json") {
+    if (type.includes("json")) {
       return FILE_TYPES.json;
     } else {
       return FILE_TYPES.csv;
@@ -206,7 +206,7 @@ export function extractChartConfig(text: string) {
       // Remove leading and trailing whitespace from the captured string
       const chartConfigStr = JSON.stringify(json);
       // Parse the string as a JavaScript object
-      return JSON.parse(chartConfigStr);
+      return JSON.parse(chartConfigStr) as Record<string, any>[];
     } catch (error) {
       console.error("Error parsing chartConfig object:", error);
       return null;

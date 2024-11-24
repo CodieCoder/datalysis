@@ -32,18 +32,3 @@ export enum FILE_TYPES {
   json = "json",
   csv = "csv",
 }
-
-export enum CHART_TYPES {
-  line = "line",
-  bar = "bar",
-  column = "Column",
-  pie = "pie",
-  doughnut = "doughnut",
-  area = "area",
-  bubble = "bubble",
-  stock = "stock",
-  heatmap = "heatmap",
-  watefall = "watefall",
-  scatter = "scatter",
-  histogram = "histogram",
-}

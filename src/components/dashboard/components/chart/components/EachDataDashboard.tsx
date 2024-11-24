@@ -9,7 +9,7 @@ import { useSimpleToast } from "simple-tailwind-toast";
 import useStore from "../../../../../hooks/useStore";
 import useGetChart from "../../../../../hooks/useGetChart";
 import useData from "../../../../../hooks/useData";
-import { extractChartConfig } from "../../../../../utils/utils";
+import { extractChartConfig, minifyJsonData } from "../../../../../utils/utils";
 import { CHART_TYPES } from "../../../../../constants/chart";
 import ChartStoreProvider from "../store";
 
@@ -31,27 +31,25 @@ const EachDataDashboard = memo(({ data, height, width }: IProps) => {
   const getChartFn = useCallback(
     (type: CHART_TYPES, chart: IData) => {
       if (chart && chart.id) {
-        const { charts, id, ...payload } = chart;
+        const { charts, id, data: chartData, ...payload } = chart;
 
         getChart.mutate(
-          { ...payload, type },
+          { ...payload, type, data: JSON.stringify(minifyJsonData(chartData)) },
           {
             onSuccess: (response) => {
               if (response?.data) {
                 //parse the js code here
-                const chartConfig = extractChartConfig(response.data);
+                // const chartConfig = extractChartConfig(response.data);
+                const chartConfig = JSON.stringify(response.data);
 
                 if (chartConfig && chartConfig?.length > 20) {
+                  const config = JSON.parse(chartConfig) as Record<string, any>;
+
                   const thisType = chart.charts?.map((each) => {
                     if (each.type === type) {
-                      // const tmp: IChart = { ...each, config: chartConfig };
                       const tmpChartConfig: IChart = {
                         ...each,
-                        config: {
-                          data: payload.data,
-                          xField: "first_name",
-                          yField: "price",
-                        },
+                        config,
                       };
                       return tmpChartConfig;
                     } else {
@@ -61,7 +59,10 @@ const EachDataDashboard = memo(({ data, height, width }: IProps) => {
 
                   //update chart data
                   if (thisType) {
-                    const updatedChart: IData = { ...chart, charts: thisType };
+                    const updatedChart: IData = {
+                      ...chart,
+                      charts: thisType,
+                    };
 
                     updateData(id, updatedChart);
                   }
@@ -85,10 +86,18 @@ const EachDataDashboard = memo(({ data, height, width }: IProps) => {
     [store?.data]
   );
 
-  const { charts, types } = useMemo(() => {
-    const charts = data.charts?.filter((chart) => !isEmpty(chart.config)) || [];
+  const {
+    charts,
+    types,
+    data: chartData,
+    label,
+    description,
+    id,
+  } = useMemo(() => {
+    const { charts: xCharts, ...rest } = data;
+    const charts = xCharts?.filter((chart) => !isEmpty(chart.config)) || [];
     const types = [...(data.charts || [])].map((chart) => chart.type);
-    return { charts, types };
+    return { ...rest, charts, types };
   }, [data]);
 
   return (
@@ -101,10 +110,14 @@ const EachDataDashboard = memo(({ data, height, width }: IProps) => {
             charts={charts!.map((chart) => ({
               key: chart.type,
               component: (
-                <ChartStoreProvider id={chart.type}>
+                <ChartStoreProvider id={chart.type} key={chart.type}>
                   <ChartRender
                     type={chart.type}
                     config={{ ...globalChartConfig, ...chart.config }}
+                    chartData={chartData}
+                    label={label}
+                    description={description}
+                    id={id}
                   />
                 </ChartStoreProvider>
               ),
